@@ -5,12 +5,12 @@ $(document).ready(function() {
 
         if ($content.hasClass('collapsed')) {
             $content.removeClass('collapsed');
-            $icon.attr('src', 'icons/collapse.png');
-            $content.find('.content').removeClass('collapsed').prev('.toggle-icon').attr('src', 'icons/collapse.png');
+            $icon.attr('src', 'icons/collapse.svg');
+            $content.find('.content').removeClass('collapsed').prev('.toggle-icon').attr('src', 'icons/collapse.svg');
         } else {
             $content.addClass('collapsed');
-            $icon.attr('src', 'icons/expand.png');
-            $content.find('.content').addClass('collapsed').prev('.toggle-icon').attr('src', 'icons/expand.png');
+            $icon.attr('src', 'icons/expand.svg');
+            $content.find('.content').addClass('collapsed').prev('.toggle-icon').attr('src', 'icons/expand.svg');
         }
     });
 });
