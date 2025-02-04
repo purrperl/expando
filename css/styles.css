@@ -5,14 +5,14 @@
 }
 
 .expando::before {
-    content: url('../icons/expand.png');
+    content: url('../icons/expand.svg');
     cursor: pointer;
     width: 20px;
     height: 20px;
     position: absolute;
     left: 0; /* Adjust to align icons properly */
     top: 0;
-    
+
 }
 
 .expando .content {
