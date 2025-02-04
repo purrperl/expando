@@ -1,0 +1,22 @@
+.collapsible {
+    position: relative;
+    margin: 10px 0;
+}
+
+.toggle-icon {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    left: -25px;
+    top: 0;
+}
+
+.content {
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+    max-height: 1000px; /* Large enough to fit content */
+}
+
+.content.collapsed {
+    max-height: 0;
+}
