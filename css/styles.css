@@ -1,13 +1,14 @@
 .collapsible {
     position: relative;
     margin: 10px 0;
+    padding-left: 25px; /* Adjust to ensure nested icons are not overlapping content */
 }
 
 .toggle-icon {
     cursor: pointer;
     font-size: 20px;
     position: absolute;
-    left: -25px;
+    left: 0; /* Adjust to align icons properly */
     top: 0;
 }
 

@@ -1,17 +1,16 @@
 $(document).ready(function() {
-    $('.collapsible').each(function() {
-        const $collapsible = $(this);
-        const $toggleIcon = $collapsible.find('.toggle-icon');
-        const $content = $collapsible.find('.content');
+    $('.collapsible .toggle-icon').on('click', function() {
+        const $icon = $(this);
+        const $content = $icon.next('.content');
 
-        $toggleIcon.on('click', function() {
-            if ($content.hasClass('collapsed')) {
-                $content.removeClass('collapsed');
-                $toggleIcon.text('-');
-            } else {
-                $content.addClass('collapsed');
-                $toggleIcon.text('+');
-            }
-        });
+        if ($content.hasClass('collapsed')) {
+            $content.removeClass('collapsed');
+            $icon.text('-');
+            $content.find('.content').removeClass('collapsed').prev('.toggle-icon').text('-');
+        } else {
+            $content.addClass('collapsed');
+            $icon.text('+');
+            $content.find('.content').addClass('collapsed').prev('.toggle-icon').text('+');
+        }
     });
 });
