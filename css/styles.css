@@ -1,7 +1,7 @@
 
 :root {
-    expand_icon: var(--expand-icon, 'icons/expand.svg');
-    collapse_icon: var(--collapse-icon, 'icons/collapse.svg');
+    --expand-icon: url('icons/expand.svg');
+    --collapse-icon: url('icons/collapse.svg');
 }
 
 
