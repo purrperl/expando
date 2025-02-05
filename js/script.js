@@ -1,7 +1,21 @@
 
 
-let collapse_icon = 'icons/collapse.svg';
-let expand_icon = 'icons/expland.svg';
+// Function to get/set cssVar 
+const cssVar = ( name, value ) => {
+    if(name.substr(0, 2) !== "--") {
+        name = "--" + name;
+    }
+
+    if(value) {
+        document.documentElement.style.setProperty(name, value)
+    }
+
+    return getComputedStyle(document.documentElement).getPropertyValue(name);
+}
+
+let collapse_icon = var(--collapse-icon);
+let expand_icon = var(--expand-icon);
+
 
 // Wait for the document to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {

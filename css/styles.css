@@ -1,3 +1,10 @@
+
+:root {
+    expand_icon: var(--expand-icon, 'icons/expand.svg');
+    collapse_icon: var(--collapse-icon, 'icons/collapse.svg');
+}
+
+
 .expando {
     position: relative;
     margin: 10px 0;
@@ -5,7 +12,7 @@
 }
 
 .expando::before {
-    content: var(--expand_icon);
+    content: var(--expand-icon);
     cursor: pointer;
     width: 20px;
     height: 20px;
