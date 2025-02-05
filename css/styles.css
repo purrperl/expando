@@ -5,7 +5,7 @@
 }
 
 .expando::before {
-    content: url('../icons/expand.svg');
+    content: var(--expand_icon);
     cursor: pointer;
     width: 20px;
     height: 20px;

@@ -1,16 +1,28 @@
-$(document).ready(function() {
-    $(document).on('click', '.expando::before', function() {
-        const $icon = $(this);
-        const $content = $icon.next('.content');
 
-        if ($content.hasClass('collapsed')) {
-            $content.removeClass('collapsed');
-            $icon.attr('src', 'icons/collapse.svg');
-            $content.find('.content').removeClass('collapsed').prev('.toggle-icon').attr('src', 'icons/collapse.svg');
-        } else {
-            $content.addClass('collapsed');
-            $icon.attr('src', 'icons/expand.svg');
-            $content.find('.content').addClass('collapsed').prev('.toggle-icon').attr('src', 'icons/expand.svg');
-        }
-    });
+
+let collapse_icon = 'icons/collapse.svg';
+let expand_icon = 'icons/expland.svg';
+
+// Wait for the document to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click event listener to the toggle icon
+    const expandoIcons = document.querySelectorAll('.expando::before');
+    for (let i = 0; i < expandoIcons.length; i++) {
+        expandoIcons[i].addEventListener('click', function() {
+            const icon = this;
+            const content = icon.parentNode.querySelector('.content');
+            const isCollapsed = content.classList.contains('collapsed');
+
+            // Toggle the collapsed class on the content element
+            if (isCollapsed) {
+                content.classList.remove('collapsed');
+                icon.style.backgroundImage = url(collapsed_icon);
+                content.style.maxHeight = content.offsetHeight + 'px';
+            } else {
+                content.classList.add('collapsed');
+                icon.style.backgroundImage = url(expand_icon);
+                content.style.maxHeight = '0px';
+            }
+        });
+    }
 });
