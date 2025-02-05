@@ -1,41 +1,29 @@
-
 :root {
     --expand-icon: url('icons/expand.svg');
     --collapse-icon: url('icons/collapse.svg');
-}
-
-
-/* Add these CSS styles */
-.collapsed .expando::before {
-    background-image: url('icons/collapse.svg');
-}
-
-.expanded .expando::before {
-    background-image: url('icons/expand.svg');
-}
-
-.expando {
-    position: relative;
-    margin: 10px 0;
-    padding-left: 30px; /* Adjust to ensure nested icons are not overlapping content */
+    --icon-size: 20px;
 }
 
 .expando::before {
-    content: var(--expand-icon);
+    content: '';
+    background-image: var(--expand-icon);
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: var(--icon-size);
+    height: var(--icon-size);
     position: absolute;
-    left: 0; /* Adjust to align icons properly */
+    left: 0;
     top: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .expando .content {
     transition: max-height 0.3s ease-out;
     overflow: hidden;
-    max-height: 1000px; /* Large enough to fit content */
+    max-height: 1000px;
 }
 
 .expando .content.collapsed {
     max-height: 0;
 }
+

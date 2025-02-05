@@ -1,11 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const defaultIconSize = '20px';
+
+    const iconSize = document.body.getAttribute('data-icon-size') || defaultIconSize;
+
+    document.documentElement.style.setProperty('--icon-size', iconSize);
+
     const expandoIcons = document.querySelectorAll('.expando');
     expandoIcons.forEach(icon => {
         icon.addEventListener('click', function() {
             const content = icon.parentNode.querySelector('.content');
             const isCollapsed = content.classList.contains('collapsed');
 
-            // Toggle the collapsed class on the content element
             if (isCollapsed) {
                 content.classList.remove('collapsed');
                 content.classList.add('expanded');
