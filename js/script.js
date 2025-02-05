@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Toggle the collapsed class on the content element
             if (isCollapsed) {
                 content.classList.remove('collapsed');
-                icon.style.backgroundImage = url(collapsed_icon);
+                icon.style.backgroundImage = url(collapse_icon);
                 content.style.maxHeight = content.offsetHeight + 'px';
             } else {
                 content.classList.add('collapsed');
