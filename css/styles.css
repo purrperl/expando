@@ -5,6 +5,15 @@
 }
 
 
+/* Add these CSS styles */
+.collapsed .expando::before {
+    background-image: url('icons/collapse.svg');
+}
+
+.expanded .expando::before {
+    background-image: url('icons/expand.svg');
+}
+
 .expando {
     position: relative;
     margin: 10px 0;
