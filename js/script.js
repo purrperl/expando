@@ -13,8 +13,8 @@ const cssVar = ( name, value ) => {
     return getComputedStyle(document.documentElement).getPropertyValue(name);
 }
 
-let collapse_icon = var(--collapse-icon);
-let expand_icon = var(--expand-icon);
+let collapse_icon = cssVar(--collapse-icon);
+let expand_icon = cssVar(--expand-icon);
 
 
 // Wait for the document to be fully loaded
