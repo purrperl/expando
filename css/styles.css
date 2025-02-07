@@ -1,6 +1,6 @@
 :root {
-    --expand-icon: 'icons/expand.svg';
-    --collapse-icon: 'icons/collapse.svg';
+    --expand-icon: url('icons/expand.svg');
+    --collapse-icon: url('icons/collapse.svg');
     --icon-size: 20px;
 }
 

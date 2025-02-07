@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.style.setProperty('--icon-size', iconSize);
 
     // Access icon URLs from CSS
-    const expandIcon = url( getComputedStyle(document.documentElement).getPropertyValue('--expand-icon') );
-    const collapseIcon = url( getComputedStyle(document.documentElement).getPropertyValue('--collapse-icon') );
+    const expandIcon = getComputedStyle(document.documentElement).getPropertyValue('--expand-icon').trim().replace(/^url\(['"]?|['"]?\)$/g, '');
+    const collapseIcon = getComputedStyle(document.documentElement).getPropertyValue('--collapse-icon').trim().replace(/^url\(['"]?|['"]?\)$/g, '');
 
     const expandoIcons = document.querySelectorAll('.expando');
     expandoIcons.forEach(icon => {
@@ -20,15 +20,16 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.insertAdjacentElement('afterbegin', img);
         }
 
-        const initiallyCollapsed = icon.getAttribute('data-expanded') === '0';
+        const isCollapsed = icon.hasAttribute('data-collapsed');
         const content = icon.parentNode.querySelector('.content');
 
-        if (initiallyCollapsed) {
-            img.src = collapseIcon;
+        // Set the initial icon based on the state
+        img.src = isCollapsed ? expandIcon : collapseIcon;
+
+        if (isCollapsed) {
             content.classList.add('collapsed');
             content.style.maxHeight = '0px';
         } else {
-            img.src = expandIcon;
             content.classList.add('expanded');
             content.style.maxHeight = content.scrollHeight + 'px';
         }
