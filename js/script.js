@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.style.setProperty('--icon-size', iconSize);
 
     // Access icon URLs from CSS
-    const expandIcon = getComputedStyle(document.documentElement).getPropertyValue('--expand-icon').trim();
-    const collapseIcon = getComputedStyle(document.documentElement).getPropertyValue('--collapse-icon').trim();
+    const expandIcon = url( getComputedStyle(document.documentElement).getPropertyValue('--expand-icon') );
+    const collapseIcon = url( getComputedStyle(document.documentElement).getPropertyValue('--collapse-icon') );
 
     const expandoIcons = document.querySelectorAll('.expando');
     expandoIcons.forEach(icon => {
