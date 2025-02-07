@@ -20,18 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.insertAdjacentElement('afterbegin', img);
         }
 
-        const initialState = icon.getAttribute('data-exp') === 'true';
+        const initiallyCollapsed = icon.getAttribute('data-expanded') === '0';
         const content = icon.parentNode.querySelector('.content');
 
-        // Set the initial icon based on the state
-        img.src = initialState ? collapseIcon : expandIcon;
-
-        if (initialState) {
-            content.classList.add('expanded');
-            content.style.maxHeight = content.scrollHeight + 'px';
-        } else {
+        if (initiallyCollapsed) {
+            img.src = collapseIcon;
             content.classList.add('collapsed');
             content.style.maxHeight = '0px';
+        } else {
+            img.src = expandIcon;
+            content.classList.add('expanded');
+            content.style.maxHeight = content.scrollHeight + 'px';
         }
 
         img.addEventListener('click', function() {
