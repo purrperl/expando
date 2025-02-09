@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             img.src = expandIcon;
         } else {
             content.classList.add('expanded');
-            content.style.maxHeight = content.scrollHeight + 'px';
+            content.style.maxHeight = '1000px'; // TO_DO: revise
             img.src = collapseIcon;
         }
 
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (isCollapsed) {
                 content.classList.remove('collapsed');
                 content.classList.add('expanded');
-                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.maxHeight = '1000px'; // TO_DO: revise ( content.scrollHeight + 'px'; )
                 img.src = collapseIcon;
             } else {
                 content.classList.add('collapsed');
