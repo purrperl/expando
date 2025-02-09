@@ -3,13 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const iconSize = document.body.getAttribute('data-icon-size') || defaultIconSize;
     document.documentElement.style.setProperty('--icon-size', iconSize);
 
-    // Access icon URLs from CSS
     const expandIcon = getComputedStyle(document.documentElement).getPropertyValue('--expand-icon').trim().replace(/^url\(['"]?|['"]?\)$/g, '');
     const collapseIcon = getComputedStyle(document.documentElement).getPropertyValue('--collapse-icon').trim().replace(/^url\(['"]?|['"]?\)$/g, '');
 
     const expandoIcons = document.querySelectorAll('.expando');
     expandoIcons.forEach(icon => {
-        // Check if an icon 'img' element has already been created
         let img = icon.querySelector('img.icon');
         if (!img) {
             img = document.createElement('img');
@@ -21,16 +19,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const isInitiallyCollapsed = icon.hasAttribute('data-collapsed');
-        const content = icon.parentNode.querySelector('.content');
+        
+        // Wrap the inner content in a div with class 'content'
+        let content = icon.querySelector('.content');
+        if (!content) {
+            content = document.createElement('div');
+            content.classList.add('content');
+            while (icon.firstChild && icon.firstChild !== img) {
+                content.appendChild(icon.firstChild);
+            }
+            icon.appendChild(content);
+        }
 
         if (isInitiallyCollapsed) {
             content.classList.add('collapsed');
             content.style.maxHeight = '0px';
-            img.src = collapseIcon;
+            img.src = expandIcon;
         } else {
             content.classList.add('expanded');
             content.style.maxHeight = content.scrollHeight + 'px';
-            img.src = expandIcon;
+            img.src = collapseIcon;
         }
 
         img.addEventListener('click', function() {
