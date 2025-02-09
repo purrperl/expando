@@ -4,19 +4,6 @@
     --icon-size: 20px;
 }
 
-.expando::before {
-    content: '';
-    background-image: var(--expand-icon);
-    cursor: pointer;
-    width: var(--icon-size);
-    height: var(--icon-size);
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
 .expando .content {
     transition: max-height 0.3s ease-out;
     overflow: hidden;
