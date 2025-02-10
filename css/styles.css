@@ -4,13 +4,18 @@
     --icon-size: 20px;
 }
 
+
+.expando {
+    display: grid;
+}
+
 .expando .content {
     transition: max-height 0.3s ease-out;
-    overflow: hidden;
-    border: 5px solid blue;
+    overflow-y: auto;
+/*    border: 5px solid blue; */
 }
 
 .expando .content.collapsed {
     max-height: 0;
-        border: 2px solid red;
+/*    border: 2px solid red; */
 }
