@@ -1,8 +1,5 @@
 # expando
 
-<link rel="stylesheet" href="css/styles.css">
-<script src="js/script.js"></script>
-
 
 A class to let you create "foldable" HTML content.
 
