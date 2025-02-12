@@ -5,6 +5,14 @@
 }
 
 
+html, body {
+  height: 100%;
+}
+
+.full_height {
+  height: 100%;
+}
+
 .expando {
     display: grid;
 }
@@ -21,8 +29,8 @@
 }
 
 .expando_icon {
-   width: iconSize;
-   height: iconSize;
+   width: var(--icon-size);
+   height: var(--icon-size);
    cursor: 'pointer';
    vertical-align: 'middle';
 }
