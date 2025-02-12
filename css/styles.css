@@ -1,37 +1,36 @@
 :root {
-    --expand-icon: url('icons/expand.svg');
-    --collapse-icon: url('icons/collapse.svg');
-    --icon-size: 20px;
+  --expand-icon: url('icons/expand.svg');
+  --collapse-icon: url('icons/collapse.svg');
+  --icon-size: 20px;
 }
 
 
 html, body {
-  height: 100%;
+height: 100%;
 }
 
 .full_height {
-  height: 100%;
+height: 100%;
 }
 
 .expando {
-    display: grid;
+  display: grid;
 }
 
 .expando .content {
-    transition: max-height 0.3s ease-out;
-    overflow-y: auto;
+  transition: max-height 0.3s ease-out;
+  overflow-y: auto;
 /*    border: 5px solid blue; */
 }
 
 .expando .content.collapsed {
-    max-height: 0;
+  max-height: 0;
 /*    border: 2px solid red; */
 }
 
 .expando_icon {
-   width: var(--icon-size);
-   height: var(--icon-size);
-   cursor: 'pointer';
-   vertical-align: 'middle';
-   height: 100%;
+ width: var(--icon-size);
+ height: var(--icon-size);
+ cursor: 'pointer';
+ vertical-align: 'middle';
 }

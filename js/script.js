@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
             img.classList.add('expando_icon');
 	    img.src = isInitiallyCollapsed ? expandIcon : collapseIcon;
 	    
-	    let data_label = icon.getAttribute('data-head') || "===";
+	    let data_label = icon.getAttribute('data-head') || " = ";
 	    let label = document.createElement('span');
-	    label.innerHTML =  data_label + ":";
+	    label.innerHTML =  data_label;
 	    label.style.fontWeight = "bold";
 	    label.style.fontSize = iconSize;
 	    label.style.verticalAlign = 'middle';
@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    outermost_expando = icon;
 	    icon.style.display = "grid";
 	    icon.style.height = 'auto';
+	    icon.classList.add('full-height');
 	    // icon.style.maxHeight = icon.scrollHeight + 'px';
 	}
 	
