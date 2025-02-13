@@ -1,4 +1,4 @@
-# expando
+# expando ( work-in-progress )
 
 
 
@@ -65,5 +65,5 @@ A class to let you create "foldable" HTML content.
 
 <HR NOSHADE>
 
-## Example Story: <A HREF="example.html">The Tale of The Rogue Cyborg</A> ( Draft )
+## Example Story: [The Tale of The Rogue Cyborg](https://purrperl.github.io/expando/example.html) ( Draft )
 This is an example of how one can quickly take notes.
