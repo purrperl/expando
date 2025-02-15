@@ -1,4 +1,4 @@
-const wrapAll = (target, wrapper = document.createElement('div')) => {
+const wrap_all = (target, wrapper) => {
     [ ...target.childNodes ].forEach(
 	child => {
 	    wrapper.appendChild(child);
@@ -10,7 +10,7 @@ const wrapAll = (target, wrapper = document.createElement('div')) => {
 
 ////////////////////////////
 
-const getNodeDepth = (n) => {
+const get_node_depth = (n) => {
     let p = n;
     let depth = 0;
     while ( p !== document.body ) {
@@ -24,7 +24,28 @@ const getNodeDepth = (n) => {
 
 ////////////////////////////
 
-const resizeAllAncestors = (target, isCollapsed) => {
+const expando = () => {
+    document.addEventListener('DOMContentLoaded', function() {
+	config.registered_tags.forEach(
+	    tag => {
+		document.querySelectorAll(tag).addClass('expando');
+	    }
+	);
+    });			      
+}
+
+////////////////////////////
+
+const read_config = () => {
+    let config = '';
+
+    return config;
+}
+
+
+////////////////////////////
+
+const resize_all_ancestors = (target, isCollapsed) => {
     let current_node = target;
     let class_list = current_node.classList;
     while ( ! (class_list && class_list.contains("outermost_expando") ) ) {
@@ -43,13 +64,13 @@ const resizeAllAncestors = (target, isCollapsed) => {
 
 ////////////////////////////
 
-let left_margin = 20;
-let left_margin_increment = 20;
+const margin_indent = 20;
 
 document.addEventListener('DOMContentLoaded', function() {
-    const defaultIconSize = getComputedStyle(document.documentElement).getPropertyValue('--icon-size') || '20px';
-    const iconSize = document.body.getAttribute('data-icon-size') || defaultIconSize;
-    document.documentElement.style.setProperty('--icon-size', iconSize);
+    const default_icon_size = getComputedStyle(document.documentElement).getPropertyValue('--icon-size') || '20px';
+    const icon_size = document.body.getAttribute('data-icon-size') || default_icon_size;
+    const icon_size_num = icon_size.replace(/px$/, '');
+    document.documentElement.style.setProperty('--icon-size', icon_size);
 
     const expandIcon = getComputedStyle(document.documentElement).getPropertyValue('--expand-icon').trim().replace(/^url\(['"]?|['"]?\)$/g, '');
     const collapseIcon = getComputedStyle(document.documentElement).getPropertyValue('--collapse-icon').trim().replace(/^url\(['"]?|['"]?\)$/g, '');
@@ -57,7 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const expandoIcons = document.querySelectorAll('.expando');
     let outermost_expando = "";
     expandoIcons.forEach(icon => {
-	let depth = getNodeDepth( icon );
+	let depth = get_node_depth( icon );
+	let margin_left = margin_indent * depth;
 	console.log("*****Entering id=[" + icon.id + "] depth=[" + depth + "]");
 
         let isInitiallyCollapsed = icon.hasAttribute('data-collapsed');
@@ -65,11 +87,48 @@ document.addEventListener('DOMContentLoaded', function() {
         // Wrap the inner content in a div with class 'content'
         let content = icon.querySelector('.content');
         if (!content) {
-            content = document.createElement('div');
-	    content.style.marginLeft = ( left_margin * depth ) + "px";
-            content.classList.add('content');
-	    wrapAll(icon, content);
-	    content = icon.querySelector('.content');
+	    content = document.createElement('div');
+	    content.style.marginLeft = margin_left + "px";
+	    content.classList.add('content');
+	    log_object( icon.tagName );
+	    let tag_name = icon.tagName;
+	    if ( tag_name === "LI"  ) {
+		let my_parent = icon.offsetParent;
+
+		if ( ! my_parent.getAttribute('indented_correctly') ) {
+		    let all_siblings = my_parent.querySelectorAll('li');
+		    if ( all_siblings ) {
+			all_siblings.forEach(
+			    my_li => {
+				let content_div = document.createElement('div');
+				let mg = (+margin_left) + (+icon_size_num);
+				content_div.style.marginLeft = mg + "px";
+				content_div.appendChild(my_li);
+				icon.appendChild(content_div);
+				log_object( "indented [" + my_li.textContent + "] by margin=[" + mg + "px]" );
+			    }
+			);
+		    }
+		    my_parent.setAttribute('indented_correctly', true);
+		}
+	    }
+	    wrap_all(icon, content);
+//	    if ( icon.tagName !== "LI" ) {
+
+	    /*	    
+	    } else {
+		let other_lis = icon.getChildNodes;
+		if ( other_lis ) {
+		    other_lis.forEach(
+			child => {
+			    content.appendChild(child);
+			}
+		    );
+		}
+		icon.appendChild(content);
+		}
+*/		
+	    // content = icon.querySelector('.content');
         }
 
         let img = icon.querySelector('img.icon');
@@ -82,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    let label = document.createElement('span');
 	    label.innerHTML =  data_label;
 	    label.style.fontWeight = "bold";
-	    label.style.fontSize = iconSize;
+	    label.style.fontSize = icon_size;
 	    label.style.verticalAlign = 'middle';
 
 	    let container = document.createElement('div');
@@ -137,8 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /////////////////////////////
 
-
-function dumpProperties (el) {
+const dump_properties = (el) => {
     for (var i = 0, atts = el.attributes, n = atts.length, arr = []; i < n; i++){
 	console.log( atts[i].nodeName + "=[" + atts[i].nodeValue + "]" );
     }
@@ -146,7 +204,7 @@ function dumpProperties (el) {
 
 ////////////////////////////
 
-function log_object(myObject) {
-    console.log(JSON.stringify(myObject, null, 2));
+const log_object = (my_object) => {
+    console.log(JSON.stringify(my_object, null, 2));
 }
 ////////////////////////////

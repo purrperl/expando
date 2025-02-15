@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expando Example</title>
-    <link rel="stylesheet" href="css/styles.css">
+    
     <link rel="stylesheet" href="https://purrperl.github.io/expando/js/css/styles.css">
-    <script src="js/script.js"></script>
     <script src="https://purrperl.github.io/expando/js/script.js"></script>
     
 </head>
@@ -35,9 +34,10 @@
       <p>The times I knew in the future...</p>
       <div class="expando" data-head="The Laboratory" data-collapsed id="2.1">
 	<p>Get up, stand up!</p>
-	<UL class="expando">
-	  <LI class="expando">Level 1:</LI>
+	<UL class="expando" data-head="Level Directory">
+	  <LI class="expando" data-head="Welcome to level 1">Level 1:</LI>
 	  <LI>Level 2:</LI>
+	  <LI class="expando" data-head="Welcome to level 3">Level 3:</LI>
 	</UL>
       </div>
       <div class="expando" data-head="The Robot Uprising" id="1.2.2">
@@ -63,3 +63,4 @@
 
 </body>
 </html>
+

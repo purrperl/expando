@@ -34,3 +34,15 @@ height: 100%;
  cursor: 'pointer';
  vertical-align: 'middle';
 }
+
+.separator {
+  display: block;
+  align-content: center;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  line-height: 10px;
+  font-size: 10px;
+  white-space-collapse: collapse;
+  max-width: 90%;
+}
+
