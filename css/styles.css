@@ -1,7 +1,9 @@
 :root {
   --expand-icon: url('icons/expand.svg');
   --collapse-icon: url('icons/collapse.svg');
+  --blank-icon: url('icons/no_image.svg');
   --icon-size: 20px;
+  --margin-indent: 25px;
 }
 
 
@@ -20,7 +22,8 @@ height: 100%;
 .expando .content {
   transition: max-height 0.3s ease-out;
   overflow-y: auto;
-/*    border: 5px solid blue; */
+  /*    border: 5px solid blue; */
+  height: 100%;
 }
 
 .expando .content.collapsed {
@@ -36,7 +39,7 @@ height: 100%;
 }
 
 .separator {
-  display: block;
+  display: flex;
   align-content: center;
   padding-top: 10px;
   padding-bottom: 50px;
@@ -46,3 +49,23 @@ height: 100%;
   max-width: 90%;
 }
 
+.separator img {
+  width: 50%;
+  height: auto;
+}
+
+.nonexpando_li {
+  display: grid;
+}
+
+.expando_blank_img {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  cursor: 'pointer';
+  vertical-align: 'middle';
+}
+
+
+.svg_blank {
+  color: '##FF00FF';
+}
