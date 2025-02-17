@@ -1,21 +1,21 @@
 {
 
-    "automatic": 'true', 
+    "automatic": "true",
     
-    "default_state": "expanded", 
-
+    "default_state": "expanded",
     
-    "expand-icon": 'icons/expand.svg',
-    "collapse_icon": 'icons/collapse.svg',
-    "blank_icon": 'icons/no_image.svg',
-
+    "expand-icon": "icons/expand.svg",
+    "collapse_icon": "icons/collapse.svg",
+    "blank_icon": "icons/no_image.svg",
 
     "default_tags" :    ["div", "ul", "ol", "li", "dl", "dt" ],
     "registered_tags" : ["div", "ul", "ol", "li", "dl", "dt" ],
 
-    "expando_indent": '25px',
+    "expando_indent": "25px",
 
-    "default_icon_size": '20px',
-    "icon_size": '20px'
+    "default_icon_size": "20px",
+    "icon_size": "20px"
+
+
 
 }
