@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expando Example</title>
 
+    <script type="module">
+      import expando_config from "https://purrperl.github.io/expando/config.json" with { type: "json" };
+      window.document.expando_config = expando_config;
+    </script>
+
+
     <link rel="stylesheet" href="https://purrperl.github.io/expando/css/styles.css">
     <script src="https://purrperl.github.io/expando/js/script.js"></script>
 
-<!--        
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/script.js"></script>
--->
     
 </head>
 <body data-icon-size="30px">
-
-    <script type="module" src="https://purrperl.github.io/expando/js/get_config.mjs">
-    </script>
 
   
   <div  id="0" data-head="The Tale of the Rogue Cyborg">

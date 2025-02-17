@@ -1,9 +1,8 @@
 {
 
-    "automatic": true, // true or false
-
+    "automatic": 'true', 
     
-    "default_state": "expanded", // "expanded" or "collapsed"
+    "default_state": "expanded", 
 
     
     "expand-icon": 'icons/expand.svg',
@@ -18,7 +17,5 @@
 
     "default_icon_size": '20px',
     "icon_size": '20px'
-
-
 
 }

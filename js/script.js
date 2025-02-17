@@ -1,3 +1,7 @@
+
+
+////////////////////////////
+
 const wrap_all = (target, wrapper) => {
     [ ...target.childNodes ].forEach(
 	child => {
@@ -10,8 +14,8 @@ const wrap_all = (target, wrapper) => {
 
 ////////////////////////////
 
-const get_node_depth = (n) => {
-    let p = n;
+const get_node_depth = (node) => {
+    let p = node;
     let depth = 0;
     while ( p !== document.body ) {
 	if ( p.classList.contains('expando') ) {
@@ -54,7 +58,7 @@ const set_img = (node, icon_size, src, color) => {
 
 ////////////////////////////
 
-const expando = () => {
+const autoconvert = () => {
     document.addEventListener('DOMContentLoaded', function() {
 	config.registered_tags.forEach(
 	    tag => {
@@ -65,63 +69,52 @@ const expando = () => {
 }
 
 ////////////////////////////
-
+/*
 const read_config = () => {
-    let config = '';
-
+    import expando_config from "https://purrperl.github.io/expando/config.json" with { type: "json" };
+    const config = expando_config;
     return config;
 }
+*/
 
+/////////////////////////////
 
-////////////////////////////
+const write_config = (data) => {
+    const fs = require('fs');
+    const jsonString = JSON.stringify(data, null, 2); // Convert to JSON string with indentation
 
-const resize_all_ancestors = (target, isCollapsed) => {
-    let current_node = target;
-    let class_list = current_node.classList;
-    while ( ! (class_list && class_list.contains("outermost_expando") ) ) {
-	if ( isCollapsed ) {
-	    // console.log("Expanding ancestor...");
-	    current_node.style.maxHeight += current_node.scrollHeight + 'px';
-	} else {
-	    // console.log("Collapsing ancestor...");
-	    current_node.style.maxHeight -= current_node.scrollHeight + 'px';
-	}
-	current_node = current_node.offsetParent.querySelector('.expando');
-	class_list = current_node.classList;
-    }    
-    return current_node;
+    fs.writeFile('./config.json', jsonString, err => {
+        if (err) {
+            console.error('Error writing file:', err);
+        } else {
+            console.log('Successfully wrote file');
+        }
+    });
+
 }
 
-////////////////////////////
-
-const get_css_attribute = (name) => {
-   return getComputedStyle(document.documentElement).getPropertyValue(name).trim().replace(/^url\(['"]?|['"]?\)$/g, '');
-}
-
-////////////////////////////
-
-
+/////////////////////////////
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Get basic parameters
-    const default_icon_size = get_css_attribute('--icon-size') || '20px';
-    const icon_size = document.body.getAttribute('data-icon-size') || default_icon_size;
-    const icon_size_num = icon_size.replace(/px$/, '');
-    document.documentElement.style.setProperty('--icon-size', icon_size);
 
-    const expand_icon = get_css_attribute('--expand-icon');
-    const collapse_icon = get_css_attribute('--collapse-icon');
-    const blank_icon = get_css_attribute('--blank-icon');
-    const margin_indent = get_css_attribute('--margin-indent').replace(/px$/, '');
+    let config = window.document.expando_config; // read_config();
+    log_object(config);
+    return;
+    document.documentElement.style.setProperty('--icon-size', config.icon_size);
+
+
+    if ( config.automatic ) {
+	autoconvert();
+    }
 
     // Iterate over all expando nodes.
     const expando_nodes = document.querySelectorAll('.expando');
     let outermost_expando = "";
     expando_nodes.forEach(my_node => {
 	let depth = get_node_depth( my_node );
-	let margin_left = margin_indent * depth;
-	console.log("*****Entering text=[" + my_node.textContent + "] depth=[" + depth + "]");
+	let margin_left = config.expando_indent * depth;
+	// console.log("*****Entering text=[" + my_node.textContent + "] depth=[" + depth + "]");
 
         let isInitiallyCollapsed = my_node.hasAttribute('data-collapsed');
 
@@ -155,25 +148,15 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Set image
         let img = my_node.querySelector('img.nonexpando_li');
         if (!img) {
-	    img = set_img(my_node, icon_size, ( isInitiallyCollapsed ? expand_icon : collapse_icon ) );
+	    img = set_img(my_node, config.icon_size, ( isInitiallyCollapsed ? config.expand_icon : config.collapse_icon ) );
         }
    
-	content.style.height = 'auto';
-	if (isInitiallyCollapsed) {
-	    content.classList.add('collapsed');
-	    // content.style.height = '0px';
-	    content.style.maxHeight = '0px';
-	} else {
-	    content.classList.add('expanded');
-	    // content.style.maxHeight = content.scrollHeight + 'px';
-	}
+
+	content.classList.add( isInitiallyCollapsed ? 'collapsed' : 'expanded');
 
 	if ( outermost_expando === "" ) {
+	    my_node.id = "outermost_expando";
 	    outermost_expando = my_node;
-	    my_node.style.display = "grid";
-	    my_node.style.height = 'auto';
-	    my_node.classList.add('full_height');
-	    // my_node.style.maxHeight = my_node.scrollHeight + 'px';
 	}
 	
 	img.addEventListener('click', function() {
@@ -182,11 +165,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	    if (isCollapsed) {
 		content.style.maxHeight = content.scrollHeight + 'px';
 		outermost_expando.style.maxHeight += content.scrollHeight + 'px';
-		img.src = collapse_icon;
+		img.src = config.collapse_icon;
 	    } else {
 		outermost_expando.style.maxHeight -= content.scrollHeight + 'px';
 		content.style.maxHeight = '0px';
-		img.src = expand_icon;
+		img.src = config.expand_icon;
 	    }
 	    content.classList.toggle('collapsed');
 	    content.classList.toggle('expanded');
@@ -200,16 +183,16 @@ document.addEventListener('DOMContentLoaded', function() {
     li_nodes.forEach( (li_node) => {
 	li_content = document.createElement('div');
 	let li_depth = get_node_depth( li_node );
-	let li_margin_left = (+margin_indent) * ( 1 + li_depth );
-	console.log("margin_indent=[" + margin_indent + "]");
-	console.log("====>Entering node=[" + li_node.textContent + "] depth=[" + li_depth + "] margin_left=[" + li_margin_left + "]");
+	let li_margin_left = (+config.expando_indent) * ( 1 + li_depth );
+	// console.log("config.expando_indent=[" + config.expando_indent + "]");
+	// console.log("====>Entering node=[" + li_node.textContent + "] depth=[" + li_depth + "] margin_left=[" + li_margin_left + "]");
 	li_content.style.marginLeft = li_margin_left + "px";
 	li_content.classList.add('content');
 	wrap_all(li_node, li_content);
 	
 	let img = li_node.querySelector('img');
 	if (!img) {
-	    img = set_img(li_node, icon_size, blank_icon, "purple");
+	    img = set_img(li_node, config.icon_size, config.blank_icon, "purple");
 	}    
     });
 
