@@ -11,9 +11,11 @@
     "default_tags" :    ["div", "ul", "ol", "li", "dl", "dt" ],
     "registered_tags" : ["div", "ul" ],
 
-    "expando_indent": "25px",
+    "expando_indent": "25",
 
     "default_icon_size": "20px",
     "icon_size": "20px"
+
+
 
 }

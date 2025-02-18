@@ -58,14 +58,22 @@ const set_img = (node, icon_size, src, color) => {
 
 ////////////////////////////
 
-const autoconvert = () => {
-    document.addEventListener('DOMContentLoaded', function() {
-	config.registered_tags.forEach(
-	    tag => {
-		document.querySelectorAll(tag).addClass('expando');
+const autoconvert = (config) => {
+    log_object("Inside autoconvert()");
+    config.registered_tags.forEach(
+	tag => {
+	    log_object("tag=[" + tag + "]");
+	    let all_nodes = document.querySelectorAll(tag);
+	    log_object("all_nodes=[" + all_nodes + "]");
+	    if ( all_nodes ) {
+		all_nodes.forEach( (n) => {
+		    log_object(n);
+		    if ( ! n.hasAttribute('data-exclude') )  {
+			n.classList.add('expando');
+		    }
+		});
 	    }
-	);
-    });			      
+	});
 }
 
 ////////////////////////////
@@ -100,12 +108,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let config = window.document.expando_config; // read_config();
     log_object(config);
-    return;
     document.documentElement.style.setProperty('--icon-size', config.icon_size);
 
+    log_object("config.automatic=[" + config.automatic + "]");
 
-    if ( config.automatic ) {
-	autoconvert();
+    if ( config.automatic === "true" ) {
+	log_object("calling autoconvert()");
+	autoconvert(config);
+    } else {
+	log_object("NOT calling autoconvert()");
     }
 
     // Iterate over all expando nodes.
@@ -150,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!img) {
 	    img = set_img(my_node, config.icon_size, ( isInitiallyCollapsed ? config.expand_icon : config.collapse_icon ) );
         }
-   
 
 	content.classList.add( isInitiallyCollapsed ? 'collapsed' : 'expanded');
 
@@ -171,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		content.style.maxHeight = '0px';
 		img.src = config.expand_icon;
 	    }
+	    content.classList.toggle('active');
 	    content.classList.toggle('collapsed');
 	    content.classList.toggle('expanded');
 	});

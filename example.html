@@ -6,13 +6,18 @@
     <title>Expando Example</title>
 
     <script type="module">
+//      import expando_config from "./config.json" with { type: "json" };
       import expando_config from "https://purrperl.github.io/expando/config.json" with { type: "json" };
       window.document.expando_config = expando_config;
     </script>
 
-
+<!--        
     <link rel="stylesheet" href="https://purrperl.github.io/expando/css/styles.css">
     <script src="https://purrperl.github.io/expando/js/script.js"></script>
+-->
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
 
     
 </head>
@@ -37,7 +42,7 @@
       <div  data-head="Wall Street" data-collapsed id="1.4">
 	<p>Unethical AI</p>
       </div>
-      <DIV CLASS="separator"><IMG SRC="https://purrperl.github.io/expando/icons/hr_fancy_1_cropped.png"></DIV>
+      <DIV CLASS="separator" data-collapsed data-exclude><IMG SRC="./icons/hr_fancy_1_cropped.png"></DIV>
     </div>
 
     <div  data-head="Chapter 2" id="2">
@@ -57,7 +62,7 @@
 	<p>Don't give up the fight.</p>
       </div>
       
-      <DIV CLASS="separator"><IMG SRC="https://purrperl.github.io/expando/icons/hr_fancy_1_cropped.png"></DIV>
+      <DIV CLASS="separator" data-collapsed><IMG SRC="./icons/hr_fancy_1_cropped.png"></DIV>
     </div>
 
 
