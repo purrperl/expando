@@ -5,20 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expando Example</title>
 
-    <script type="module">
-//      import expando_config from "./config.json" with { type: "json" };
-      import expando_config from "https://purrperl.github.io/expando/config.json" with { type: "json" };
-      window.document.expando_config = expando_config;
+
+
+<script language="JavaScript">
+
+const readAsDataURL = (file) => {
+    return new Promise((resolve, reject) => {
+        const fr = new FileReader();
+        fr.onerror = reject;
+        fr.onload = () => {
+            resolve(fr.result);
+        }
+        fr.readAsDataURL(file);
+    });
+}
+
+/////////////////////////////////////////////////////////
+
+const readFile = (file) => {
+  return new Promise((resolve, reject) => {
+    var fr = new FileReader();  
+    fr.onload = () => {
+      resolve(fr.result )
+    };
+    fr.onerror = reject;
+    fr.readAsText(file.blob);
+  });
+}
+  
+  
+</script>
+<script type="module">
+/*
+  const expando_config = await import('./config.json', {
+      with: { type: "json" }
+  });
+*/
+  
+//  import expando_config from "./config.json" with { type: "json" };
+
+//      import expando_config from "https://purrperl.github.io/expando/config.json" with { type: "json" };
+
+//    window.document.expando_config = expando_config;
     </script>
 
-
+<!--        
     <link rel="stylesheet" href="https://purrperl.github.io/expando/css/styles.css">
     <script src="https://purrperl.github.io/expando/js/script.js"></script>
+-->
 
-<!--        
+
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js"></script>
--->
     
 </head>
 <body data-icon-size="30px">
@@ -42,30 +80,27 @@
       <div  data-head="Wall Street" data-collapsed id="1.4">
 	<p>Unethical AI</p>
       </div>
-      <DIV CLASS="separator" data-collapsed data-exclude><IMG SRC="./icons/hr_fancy_1_cropped.png"></DIV>
     </div>
+
+    <DIV CLASS="separator" data-exclude><IMG SRC="./icons/hr_fancy_1_cropped.png"></DIV>
 
     <div  data-head="Chapter 2" id="2">
       <p>The times I knew in the future...</p>
-      <div  data-head="The Laboratory" data-collapsed id="2.1">
-	<p>Get up, stand up!</p>
-	<UL  data-head="Level Directory">
-	  <LI  data-head="Welcome to level 1">Level 1:</LI>
-	  <LI>Level 2:</LI>
-	  <LI  data-head="Welcome to level 3">Level 3:</LI>
-	</UL>
-      </div>
-      <div  data-head="The Robot Uprising" id="1.2.2">
-	<p>Stand up, for your rights.</p>
+      <UL  data-head="The Laboratory" data-collapsed id="2.1">
+	  <LI  data-head="Software"><PRE>GET /up</PRE></LI>
+	  <LI data-collapsed data-head="Wetware">computer...OK.</LI>
+	  <LI data-head="Hardware">"Stand up."</LI>
+      </UL>
+      <div  data-collapsed data-head="The Robot Uprising" id="1.2.2">
+	<p>Stand up, for your rights!</p>
       </div>
       <div  data-collapsed data-head="The War" data-collapsed id="1.2.3">
 	<p>Don't give up the fight.</p>
       </div>
       
-      <DIV CLASS="separator" data-collapsed data-exclude><IMG SRC="./icons/hr_fancy_1_cropped.png"></DIV>
     </div>
 
-
+    <DIV CLASS="separator" data-exclude><IMG SRC="./icons/hr_fancy_1_cropped.png"></DIV>
     
     <div  data-head="Chapter 3" id="1.3">
       <div  data-head="Watchtower" id="1.3.1">
