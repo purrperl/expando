@@ -1,5 +1,4 @@
 
-
 ////////////////////////////
 
 const wrap_all = (target, wrapper) => {
@@ -77,28 +76,65 @@ const autoconvert = (config) => {
 }
 
 ////////////////////////////
-/*
-const read_config = () => {
-    import expando_config from "https://purrperl.github.io/expando/config.json" with { type: "json" };
-    const config = expando_config;
-    return config;
+
+let myPromise;
+
+////////////////////////////
+
+function read_config () {
+    console.log("enter read_config");
+
+    return {
+	"automatic": "true",
+
+	"default_state": "expanded",
+
+	"expand_icon": "icons/expand.svg",
+	"collapse_icon": "icons/collapse.svg",
+	"blank_icon": "icons/no_image.svg",
+
+	"default_tags" :    ["div", "ul", "ol", "li", "dl", "dt" ],
+	"registered_tags" : ["div", "ul", "li" ],
+
+	"expando_indent": "25",
+
+	"default_icon_size": "20px",
+	"icon_size": "20px"
+    };
 }
-*/
+
+/* **********************************
+    
+  myPromise = new Promise(function(resolve) {
+      // setTimeout(function() {resolve("I love You !!");}, 3000);
+
+      fetch('http://localhost/expando/config.json')
+
+	  .then(response => response.json())
+
+	  .then(config => {
+	      window.document.expando_config = config;
+	      console.log("++++++++++++just read config");
+	      console.log(config);
+	      if ( window.document.expando_config ) {
+		  console.log("=========w.config is defined.");
+		  log_object(config);
+	      } else {
+		  console.log("=========w.config is not defined.");
+	      }
+	  })
+
+	  .catch(error => console.error('Error fetching JSON:', error));
+  });
+
+}
+
+
+ ********************************** */
 
 /////////////////////////////
-
-const write_config = (data) => {
-    const fs = require('fs');
-    const jsonString = JSON.stringify(data, null, 2); // Convert to JSON string with indentation
-
-    fs.writeFile('./config.json', jsonString, err => {
-        if (err) {
-            console.error('Error writing file:', err);
-        } else {
-            console.log('Successfully wrote file');
-        }
-    });
-
+function sleepy_func()  {
+    console.log("...sleeping.");
 }
 
 /////////////////////////////
@@ -106,7 +142,22 @@ const write_config = (data) => {
 document.addEventListener('DOMContentLoaded', function() {
 
 
-    let config = window.document.expando_config; // read_config();
+    console.log("==========================read_config BEGIN");
+    console.log(window.document.expando_config);
+    let config = read_config();
+//    let config = await myPromise;
+    console.log(window.document.expando_config);
+    console.log("==========================read_config END");
+
+//   while ( ! window.document.expando_config ) {
+//	console.log("...sleeping...");
+//	setTimeout( sleepy_func, 100000);
+//    }
+//    console.log("...woke.");
+
+//    let config = window.document.expando_config;
+
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     log_object(config);
     document.documentElement.style.setProperty('--icon-size', config.icon_size);
 
@@ -174,10 +225,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	    if (isCollapsed) {
 		content.style.maxHeight = content.scrollHeight + 'px';
-		outermost_expando.style.maxHeight += content.scrollHeight + 'px';
+		// outermost_expando.style.maxHeight += content.scrollHeight + 'px';
 		img.src = config.collapse_icon;
 	    } else {
-		outermost_expando.style.maxHeight -= content.scrollHeight + 'px';
+		// outermost_expando.style.maxHeight -= content.scrollHeight + 'px';
 		content.style.maxHeight = '0px';
 		img.src = config.expand_icon;
 	    }
